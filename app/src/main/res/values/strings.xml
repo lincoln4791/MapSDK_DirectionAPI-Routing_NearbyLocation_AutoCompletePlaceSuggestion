@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MapSDK_Direction_Routing_nearbyLocation_AutoPlaceSugestion</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string-array name="types">
+        <item>atm</item>
+        <item>bank</item>
+        <item>bar</item>
+        <item>hospital</item>
+        <item>restaurant</item>
+        <item>primary_school</item>
+        <item>university</item>
+    </string-array>
+
+</resources>
