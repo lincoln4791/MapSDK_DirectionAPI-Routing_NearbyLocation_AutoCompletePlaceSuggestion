@@ -180,8 +180,27 @@ public class MainActivity2 extends AppCompatActivity implements OnMapReadyCallba
     }
 
 
+    private void showRemoveDropPinOrFindRouteButton() {
+        if(originLatLng!=null && destinationLatLng!=null){
+            btn_dropPin.setVisibility(View.GONE);
+            btn_route.setVisibility(View.VISIBLE);
+        }
+        else{
+            btn_dropPin.setVisibility(View.VISIBLE);
+            btn_route.setVisibility(View.GONE);
+        }
+    }
+
+
+
+
+
+
     private void dropOriginPin() {
         gMap.clear();
+
+        showRemoveDropPinOrFindRouteButton();
+
 
         if (destinationLatLng != null) {
             placeMarkerInDestination();
@@ -193,9 +212,13 @@ public class MainActivity2 extends AppCompatActivity implements OnMapReadyCallba
 
     }
 
+
+
+
+
     private void dropDestinationPin() {
         gMap.clear();
-
+        showRemoveDropPinOrFindRouteButton();
         if (originLatLng != null) {
             placeMarkerInOrigin();
         }
@@ -218,7 +241,7 @@ public class MainActivity2 extends AppCompatActivity implements OnMapReadyCallba
 
     private void placeMarkerInDestination() {
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.title("My place");
+        markerOptions.title("place");
         markerOptions.position(destinationLatLng);
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
         destinationMarker = gMap.addMarker(markerOptions);
@@ -291,6 +314,9 @@ public class MainActivity2 extends AppCompatActivity implements OnMapReadyCallba
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE_DESTINATION) {
             if (resultCode == RESULT_OK) {
+
+                btn_dropPin.setVisibility(View.VISIBLE);
+                btn_route.setVisibility(View.GONE);
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 et_destination.setText(place.getAddress());
                 destinationLat = place.getLatLng().latitude;
@@ -310,6 +336,10 @@ public class MainActivity2 extends AppCompatActivity implements OnMapReadyCallba
             return;
         } else if (requestCode == AUTOCOMPLETE_REQUEST_CODE_ORIGIN) {
             if (resultCode == RESULT_OK) {
+
+                btn_dropPin.setVisibility(View.VISIBLE);
+                btn_route.setVisibility(View.GONE);
+
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 et_origin.setText(place.getAddress());
                 originLat = place.getLatLng().latitude;
@@ -336,15 +366,9 @@ public class MainActivity2 extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
+        btn_dropPin.setVisibility(View.VISIBLE);
         startLocationUpdates();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         gMap.setMyLocationEnabled(true);
@@ -623,6 +647,7 @@ public class MainActivity2 extends AppCompatActivity implements OnMapReadyCallba
                             MarkerOptions markerOptions1 = new MarkerOptions();
                             markerOptions1.title(placeName);
                             markerOptions1.position(latLng1);
+                            markerOptions1.snippet(getAddressFromLatlng(latLng1));
                             gMap.addMarker(markerOptions1);
                             //Toast.makeText(MapForRetrofit.this, "done", Toast.LENGTH_SHORT).show();
 
@@ -677,6 +702,8 @@ public class MainActivity2 extends AppCompatActivity implements OnMapReadyCallba
     @Override
     protected void onStart() {
         super.onStart();
+        et_origin.setText("");
+        et_destination.setText("");
         checkFineLocaionPermission();
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
@@ -30,9 +31,10 @@ public class AdapterCustomInfoWindow implements GoogleMap.InfoWindowAdapter {
         String snippet = marker.getSnippet();
         TextView tv_snippet = view.findViewById(R.id.tv_snippet_infoWindowAdapter);
 
-        if(!snippet.equals("")){
+        if(snippet!=null && !snippet.isEmpty()){
             tv_snippet.setText(snippet);
         }
+
 
     }
 

@@ -62,16 +62,15 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="@id/cv_spinner_DistanceMatrix"
-        app:layout_constraintEnd_toEndOf="@id/cv_spinner_DistanceMatrix"
-        app:layout_constraintTop_toBottomOf="@id/cv_spinner_DistanceMatrix">
+        app:layout_constraintBottom_toBottomOf="@+id/cv_spinner_DistanceMatrix"
+        app:layout_constraintStart_toEndOf="@+id/cv_spinner_DistanceMatrix"
+        app:layout_constraintTop_toTopOf="@+id/cv_spinner_DistanceMatrix">
+
         <ImageView
             android:id="@+id/iv_searchNearbyLocations_DistanceMatrix"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_search_24"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_search_24" />
     </com.google.android.material.card.MaterialCardView>
 
 
@@ -107,26 +106,30 @@
         android:layout_marginStart="10dp"
         android:text="distance"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/btn_dropPin_DistanceMatrix"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="Drop Pin"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_Route_DistanceMatrix"
-        app:layout_constraintTop_toTopOf="@+id/btn_Route_DistanceMatrix" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_Route_DistanceMatrix" />
 
 
     <Button
         android:id="@+id/btn_Route_DistanceMatrix"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="Route"
+        android:text="Find Route"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_distance_DistanceMatrix" />
 
 
